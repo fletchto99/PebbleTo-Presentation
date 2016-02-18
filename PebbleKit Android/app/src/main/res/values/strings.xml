@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">PebbleKit Sports Example</string>
+  <string name="activity_sports">Sports App Example</string>
+  <string name="main_image">Running man image</string>
+  <string name="paused">Paused</string>
+  <string name="open">Open App</string>
+  <string name="close">Close App</string>
+  <string name="customize">Customize App</string>
+  <string name="refresh">Update Data</string>
+  <string name="change_units">Change Units</string>
+  <string name="pebble_app_name">Pebble Hockey</string>
+</resources>
