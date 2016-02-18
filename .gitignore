@@ -30,3 +30,4 @@ proguard/
 
 # Android Studio captures folder
 captures/
+.lock-waf_darwin_build
