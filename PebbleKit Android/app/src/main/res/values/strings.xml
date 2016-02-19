@@ -10,4 +10,6 @@
   <string name="refresh">Randomize Data</string>
   <string name="change_units">Change Units</string>
   <string name="pebble_app_name">Pebble Hockey</string>
+  <string name="state_paused">Running</string>
+  <string name="state_running">Paused</string>
 </resources>

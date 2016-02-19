@@ -65,6 +65,7 @@ public class PebbleSportsExample extends Activity {
             public void receiveData(final Context context, final int transactionId, final PebbleDictionary data) {
                 sportsState = data.getUnsignedIntegerAsLong(Constants.SPORTS_STATE_KEY).intValue();
 
+                //Acknowledge that we received the message and handled it properly
                 PebbleKit.sendAckToPebble(context, transactionId);
 
                 //Post to handler to ensure the state has been updated, but is not blocking
@@ -99,9 +100,9 @@ public class PebbleSportsExample extends Activity {
 
         //For some reason this is backwards... Their example was like that too.
         if (sportsState == Constants.SPORTS_STATE_PAUSED) {
-            statusText.setText("Running");
+            statusText.setText(R.string.state_paused);
         } else {
-            statusText.setText("Paused");
+            statusText.setText(R.string.state_running);
         }
     }
 
