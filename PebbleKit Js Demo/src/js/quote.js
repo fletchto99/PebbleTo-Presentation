@@ -4,7 +4,7 @@ module.exports.retrieveQuote = function(success, fail) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             try {
                 var response = JSON.parse(xhr.responseText);
-                success(response.quote, response.author);
+                success(response.contents.quotes[0].quote, response.contents.quotes[0].author);
             } catch(e) {
                 fail();
             }
@@ -12,6 +12,6 @@ module.exports.retrieveQuote = function(success, fail) {
             fail();
         }
     };
-    xhr.open("GET", "https://fletchto99.com/other/pebble/pebbleto/quote.json", true);
+    xhr.open("GET", "http://quotes.rest/qod.json", true);
     xhr.send();
 };
