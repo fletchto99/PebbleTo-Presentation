@@ -61,9 +61,12 @@ Pebble.addEventListener('webviewclosed', function(e) {
     //Get the settings that clay provides us
     var settings = clay.getSettings(e.response);
 
+    //check if custom quotes are enabled
     if (settings.enableCustomQuote) {
+        //send the custom quote to the pebble
         sendQuote(settings);
     } else {
+        //Retrive a quote from the web
         quote.retrieveQuote(function(quote, author) {
             settings.quote = quote;
             settings.author = author;

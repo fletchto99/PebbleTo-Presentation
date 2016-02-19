@@ -1,5 +1,9 @@
+//Export the function
 module.exports.retrieveQuote = function(success, fail) {
-    xhr = new XMLHttpRequest();
+    // create the XML HTTP Request
+    var xhr = new XMLHttpRequest();
+
+    //Listen for a response
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             try {
@@ -12,6 +16,8 @@ module.exports.retrieveQuote = function(success, fail) {
             fail();
         }
     };
+
+    //Send the request
     xhr.open("GET", "http://quotes.rest/qod.json", true);
     xhr.send();
 };
