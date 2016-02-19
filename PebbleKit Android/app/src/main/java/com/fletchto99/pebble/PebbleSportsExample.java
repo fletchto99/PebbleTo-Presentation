@@ -43,18 +43,6 @@ public class PebbleSportsExample extends Activity {
         setContentView(R.layout.activity_sports);
     }
 
-    //Called when the android application is no-longer in the foreground and enters a "paused" state
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Always deregister any Activity-scoped BroadcastReceivers when the Activity is paused
-        if (sportsDataHandler != null) {
-            unregisterReceiver(sportsDataHandler);
-            sportsDataHandler = null;
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -91,6 +79,19 @@ public class PebbleSportsExample extends Activity {
 
         //Register the received handler, for when an appmessage comes in.
         PebbleKit.registerReceivedDataHandler(this, sportsDataHandler);
+    }
+
+
+    //Called when the android application is no-longer in the foreground and enters a "paused" state
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Always deregister any Activity-scoped BroadcastReceivers when the Activity is paused
+        if (sportsDataHandler != null) {
+            unregisterReceiver(sportsDataHandler);
+            sportsDataHandler = null;
+        }
     }
 
     public void handleStatechange() {
