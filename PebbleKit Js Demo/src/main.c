@@ -6,32 +6,14 @@ static TextLayer *text_layer;
 static GColor color;
 static bool active;
 
-
 /*
- * Initializes the main window and adds the text layer which will contain the quote
+ * Handles incoming app messages
  */
-static void window_load(Window *window) {
-  Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_bounds(window_layer);
-
-  //Setup the text layer
-  text_layer = text_layer_create(GRect(0, 30, bounds.size.w, 120));
-  text_layer_set_text(text_layer, "Loading...");
-  text_layer_set_background_color(text_layer, GColorClear);
-  text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-
-  //Add the text layer to the root window layer
-  layer_add_child(window_layer, text_layer_get_layer(text_layer));
-}
-
-static void window_unload(Window *window) {
-  text_layer_destroy(text_layer);
-}
-
 static void in_received_handler(DictionaryIterator *iter, void *context) {
+  //Create a tuple
   Tuple *tuple = NULL;
 
-  //Look for the background toggle
+  //Look for the background toggle tuple, we know it will be on key 0
   tuple = dict_find(iter, 0);
   if(tuple) {
     active = tuple->value->int32;
@@ -59,6 +41,30 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 }
 
 /*
+ * Initializes the main window and adds the text layer which will contain the quote
+ */
+static void window_load(Window *window) {
+  Layer *window_layer = window_get_root_layer(window);
+  GRect bounds = layer_get_bounds(window_layer);
+
+  //Setup the text layer
+  text_layer = text_layer_create(GRect(0, 30, bounds.size.w, 120));
+  text_layer_set_text(text_layer, "Loading...");
+  text_layer_set_background_color(text_layer, GColorClear);
+  text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
+
+  //Add the text layer to the root window layer
+  layer_add_child(window_layer, text_layer_get_layer(text_layer));
+}
+
+/*
+ * Handles unloading the text layer
+ */
+static void window_unload(Window *window) {
+  text_layer_destroy(text_layer);
+}
+
+/*
  * Initializes the app:
  * - Listen for app messages
  * - Initialize the main window
@@ -72,6 +78,7 @@ static void init(void) {
   app_message_open(256, 0);
   app_message_register_inbox_received(in_received_handler);
 
+  // Creates the main window and sets it's load and unload callbacks
   window = window_create();
   window_set_window_handlers(window, (WindowHandlers) {
     .load = window_load,
@@ -82,11 +89,19 @@ static void init(void) {
   window_stack_push(window, true);
 }
 
+/*
+ * Destroys all windows
+ * De-registers the app message handlers
+ */
 static void deinit(void) {
   window_destroy(window);
   app_message_deregister_callbacks();
 }
 
+/*
+ * Main Loop
+ * Initializes app and then performs the app loop
+ */
 int main(void) {
   init();
   app_event_loop();
