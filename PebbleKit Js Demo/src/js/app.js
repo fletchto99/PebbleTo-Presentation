@@ -13,7 +13,7 @@ Pebble.addEventListener('ready', function(e) {
         var quoteData = {};
 
         //load the background colors
-        quoteData.enableBachground = localStorage.getItem('enableBackground');
+        quoteData.enableBackground = localStorage.getItem('enableBackground');
         quoteData.background = localStorage.getItem('background');
 
         //check if we have a custom quote saved
@@ -66,7 +66,7 @@ Pebble.addEventListener('webviewclosed', function(e) {
         //send the custom quote to the pebble
         sendQuote(settings);
     } else {
-        //Retrive a quote from the web
+        //Retrieve a quote from the web
         quote.retrieveQuote(function(quote, author) {
             settings.quote = quote;
             settings.author = author;
