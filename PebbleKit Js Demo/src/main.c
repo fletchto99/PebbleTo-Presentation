@@ -3,8 +3,9 @@
 //Some vars used throughout the app
 static Window *window;
 static TextLayer *text_layer;
-static bool active = false;
-static GColor color = GCOlorWhite;
+static GColor color;
+static bool active;
+
 
 /*
  * Initializes the main window and adds the text layer which will contain the quote
@@ -63,6 +64,10 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
  * - Initialize the main window
  */
 static void init(void) {
+  //Setup some defaults
+  active = false;
+  color = GColorWhite;
+
   //Listen for incoming app messages
   app_message_open(256, 0);
   app_message_register_inbox_received(in_received_handler);
