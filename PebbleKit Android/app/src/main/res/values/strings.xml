@@ -7,7 +7,7 @@
   <string name="open">Open App</string>
   <string name="close">Close App</string>
   <string name="customize">Customize App</string>
-  <string name="refresh">Update Data</string>
+  <string name="refresh">Randomize Data</string>
   <string name="change_units">Change Units</string>
   <string name="pebble_app_name">Pebble Hockey</string>
 </resources>

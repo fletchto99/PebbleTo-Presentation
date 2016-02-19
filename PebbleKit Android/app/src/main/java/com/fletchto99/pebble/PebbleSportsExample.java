@@ -21,6 +21,8 @@ public class PebbleSportsExample extends Activity {
 
     private final Random rand = new Random();
     private PebbleKit.PebbleDataReceiver sportsDataHandler = null;
+
+    //Some states/vars used
     private int sportsState = Constants.SPORTS_STATE_INIT;
     private boolean useMetric = false;
     private boolean isPaceLabel = true;
@@ -58,24 +60,29 @@ public class PebbleSportsExample extends Activity {
         sportsDataHandler = new PebbleKit.PebbleDataReceiver(Constants.SPORTS_UUID) {
             @Override
             public void receiveData(final Context context, final int transactionId, final PebbleDictionary data) {
-                sportsState = data.getInteger(Constants.SPORTS_STATE_KEY).intValue();
+                sportsState = data.getUnsignedIntegerAsLong(Constants.SPORTS_STATE_KEY).intValue();
 
                 PebbleKit.sendAckToPebble(context, transactionId);
 
+                //Post to handler to ensure the state has been updated
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        updateUi();
+                        handleStatechange();
                     }
                 });
             }
         };
+
+        //Register the received handler, for when an appmessage comes in.
         PebbleKit.registerReceivedDataHandler(this, sportsDataHandler);
     }
 
-    public void updateUi() {
+    public void handleStatechange() {
         TextView statusText = (TextView) findViewById(R.id.status);
-        if (sportsState == Constants.SPORTS_STATE_RUNNING) {
+
+        //For some reason this is backwards... Their example was like that too.
+        if (sportsState == Constants.SPORTS_STATE_PAUSED) {
             statusText.setText("Running");
         } else {
             statusText.setText("Paused");
@@ -120,6 +127,8 @@ public class PebbleSportsExample extends Activity {
         data.addString(Constants.SPORTS_TIME_KEY, time);
         data.addString(Constants.SPORTS_DISTANCE_KEY, distance);
         data.addString(Constants.SPORTS_DATA_KEY, addl_data);
+
+        //determine if we should show pace or speed
         data.addUint8(Constants.SPORTS_LABEL_KEY, (byte) (isPaceLabel ? Constants.SPORTS_DATA_SPEED : Constants.SPORTS_DATA_PACE));
 
         PebbleKit.sendDataToPebble(getApplicationContext(), Constants.SPORTS_UUID, data);
