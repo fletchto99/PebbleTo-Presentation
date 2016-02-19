@@ -1,0 +1,24 @@
+{
+  "uuid": "34a51e5e-2a05-46d0-be71-34d98833ed76",
+  "shortName": "Quote of the Day",
+  "longName": "Quote of the Day",
+  "companyName": "Matt Langlois",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt", "chalk"],
+  "enableMultiJS": true,
+  "watchapp": {
+    "watchface": false
+  },
+  "capabilities": [
+    "configurable"
+  ],
+  "appKeys": {
+    "enableBackground": 0,
+    "background": 1,
+    "quote": 2
+  },
+  "resources": {
+    "media": []
+  }
+}

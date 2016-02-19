@@ -1,0 +1,48 @@
+[
+{ "type": "heading", "defaultValue": "Quote of the Day" },
+{
+  "type": "section",
+  "items": [
+    {
+      "type": "toggle",
+      "id": "enableBackground",
+      "appKey": "enableBackground",
+      "label": "Enable Background"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "appKey": "background",
+      "defaultValue": "FF0000",
+      "label": "Background Color",
+      "sunlight": true
+    }
+  ]
+},
+{
+  "type": "section",
+  "items": [
+    {
+      "type": "toggle",
+      "id": "enableCustomQuote",
+      "appKey": "enableCustomQuote",
+      "label": "Enable Custom Quote"
+    },
+    {
+      "type": "input",
+      "id": "quote",
+      "appKey": "quote",
+      "defaultValue": "Hello World",
+      "label": "Custom Quote"
+    },
+    {
+      "type": "input",
+      "id": "author",
+      "appKey": "author",
+      "defaultValue": "Matt Langlois",
+      "label": "Author"
+    }
+  ]
+},
+{ "type": "submit", "defaultValue": "Done" }
+]
