@@ -27,13 +27,11 @@ static void in_received_handler(DictionaryIterator *iter, void *context) {
 
   tuple = dict_find(iter, 0);
   if(tuple) {
-    APP_LOG(0, "active %ld", tuple->value->int32);
     active = tuple->value->int32;
   }
 
   tuple = dict_find(iter, 1);
   if(tuple) {
-    APP_LOG(0, "color %ld", tuple->value->int32);
     color = GColorFromHEX(tuple->value->int32);
   }
 
