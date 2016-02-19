@@ -49,7 +49,7 @@ Pebble.addEventListener('ready', function(e) {
 });
 
 Pebble.addEventListener('showConfiguration', function(e) {
-    //Have cla build our configuration page
+    //Have clay build our configuration page
     Pebble.openURL(clay.generateUrl());
 });
 
